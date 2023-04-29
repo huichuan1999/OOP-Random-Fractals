@@ -136,6 +136,11 @@ button:hover {
 
 @media screen and (max-width: 767px) {
 
+  body {
+    font-size: 20px;
+    width: 100%;
+  }
+  
   .controls-container {
     position: absolute;
     top: 100px;
