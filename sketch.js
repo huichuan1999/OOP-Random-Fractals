@@ -1,10 +1,14 @@
 let redSlider, greenSlider, blueSlider, alphaSlider,
 weightSlider, depthSlider, lengthSlider,angleSlider;
-let saveSVGButton, saveImageButton, toggleWeightButton, clearModeButron;
+let saveSVGButton, saveImageButton, toggleWeightButton, 
+clearModeButron;
+
 let currentWeight = 1;
 let decreasingWeight = false;
 let angleDisplay;
 let clearEnabled = true;
+
+//let drawEllipseAtEnd = true; 
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight, SVG);
@@ -67,7 +71,7 @@ function setup() {
   saveSVGButton.mousePressed(exportSVG);
   saveImageButton.mousePressed(() => save("myImage.png"));
   //toggleWeightButton.mousePressed(() => decreasingWeight = !decreasingWeight);
-  //clearModeButron.mousePressed(() => clearEnabled = !clearEnabled);
+
   clearModeButron.mousePressed(() => {
     clearEnabled = !clearEnabled;
     updateAngleDisplay();
