@@ -23,6 +23,12 @@ h1 {
   z-index: 0;
 }
 
+p{
+  margin: 5px;
+  padding: 5px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
 canvas {
   position: absolute;
   left: 0;
@@ -173,10 +179,10 @@ button:hover {
     margin: 0 5px;
     box-sizing: border-box;
   }
-
+/* 
   input[type=range] {
-    width: 280px;
-  }
+    width: 320px;
+  } */
 
   #slider-container {
     position: fixed;
