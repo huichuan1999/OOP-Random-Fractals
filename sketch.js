@@ -1,110 +1,59 @@
 let redSlider, greenSlider, blueSlider, alphaSlider,
-weightSlider, depthSlider, lengthSlider,angleSlider;
-let saveSVGButton, saveImageButton, toggleWeightButton, 
-clearModeButron;
+  weightSlider, depthSlider, lengthSlider, angleSlider;
+let saveSVGButton, saveImageButton, toggleWeightButton,
+  clearModeButron, ellipseToggleButton;
 
 let currentWeight = 1;
 let decreasingWeight = false;
 let angleDisplay;
 let clearEnabled = true;
 
-//let drawEllipseAtEnd = true; 
+let drawEllipseAtEnd = true; 
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight, SVG);
+
   //canvas.id("canvas");
   //canvas.parent("sketch-container"); //SVG canvas cannot add into parent, It is weird
 
-  redSlider = createSlider(0, 255, random(255));
-  let redLabel = createP("Red");
-  redLabel.parent("slider-row-1");
-  redSlider.parent("slider-row-1");
+  redSlider = new ColorSlider("Red", random(255), "slider-row-1");
+  greenSlider = new ColorSlider("Green", random(255), "slider-row-1");
+  blueSlider = new ColorSlider("Blue", random(255), "slider-row-1");
+  alphaSlider = new ColorSlider("Alpha", 150, "slider-row-1");
 
-  greenSlider = createSlider(0, 255, random(255));
-  let greenLabel = createP("Green");
-  greenLabel.parent("slider-row-1");
-  greenSlider.parent("slider-row-1");
+  weightSlider = new NumberSlider("Stroke", 1, 10, random(1, 5), undefined, "slider-row-2");
+  depthSlider = new NumberSlider("Depth", 1, 10, 7, undefined, "slider-row-2");
+  angleSlider = new NumberSlider("Angle", 0, TWO_PI, random(TWO_PI), 0.01, "slider-row-2");
+  lengthSlider = new NumberSlider("Length", 0, 500, 100, undefined, "slider-row-2");
 
-  blueSlider = createSlider(0, 255, random(255));
-  let blueLabel = createP("Blue");
-  blueLabel.parent("slider-row-1");
-  blueSlider.parent("slider-row-1");
-
-  alphaSlider = createSlider(0, 255, 150);
-  let alphaLabel = createP("Alpha");
-  alphaLabel.parent("slider-row-1");
-  alphaSlider.parent("slider-row-1");
-
-  weightSlider = createSlider(1, 10, random(1,5));
-  let weightLabel = createP("Stroke");
-  weightLabel.parent("slider-row-2");
-  weightSlider.parent("slider-row-2");
-
-  depthSlider = createSlider(1, 10, 7);
-  let depthLabel = createP("Depth");
-  depthLabel.parent("slider-row-2");
-  depthSlider.parent("slider-row-2");
-
-  angleSlider = createSlider(0, TWO_PI, random(TWO_PI), 0.01);
-  let angleLabel = createP("Angle");
-  angleLabel.parent("slider-row-2");
-  angleSlider.parent("slider-row-2");
-
-  lengthSlider = createSlider(0, 500, 100);
-  let lengthLabel = createP("Length");
-  lengthLabel.parent("slider-row-2");
-  lengthSlider.parent("slider-row-2");
-
-  saveSVGButton = createButton("Save SVG");
-  saveImageButton = createButton("Save Image");
-  //toggleWeightButton = createButton("Toggle Stroke Weight");
-  clearModeButron = createButton("Clear Mode");
-
-  saveSVGButton.parent("button-container");
-  saveImageButton.parent("button-container");
-  //toggleWeightButton.parent("button-container");
-  clearModeButron.parent("button-container");
+  saveSVGButton = new CustomButton("Save SVG", exportSVG, "button-container");
+  saveImageButton = new CustomButton("Save Image", () => save("myImage.png"), "button-container");
+  clearModeButron = new CustomButton("Clear Mode", () => { clearEnabled = !clearEnabled; updateAngleDisplay(); }, "button-container");
+  ellipseToggleButton = new CustomButton("Draw Fruits",() => { drawEllipseAtEnd = !drawEllipseAtEnd;}, "button-container");
 
   angleDisplay = createSpan();
   angleDisplay = select("#angleDisplay");
-
-  saveSVGButton.mousePressed(exportSVG);
-  saveImageButton.mousePressed(() => save("myImage.png"));
-  //toggleWeightButton.mousePressed(() => decreasingWeight = !decreasingWeight);
-
-  clearModeButron.mousePressed(() => {
-    clearEnabled = !clearEnabled;
-    updateAngleDisplay();
-  });
-
-  redSlider.addClass("custom-slider");
-  greenSlider.addClass("custom-slider");
-  blueSlider.addClass("custom-slider");
-  alphaSlider.addClass("custom-slider");
-  weightSlider.addClass("custom-slider");
-  depthSlider.addClass("custom-slider");
-  angleSlider.addClass("custom-slider");
-  lengthSlider.addClass("custom-slider");
-
 }
+
 function draw() {
   if (clearEnabled) {
     clear();
   }
-  //clear();
-  let r = redSlider.value();
-  let g = greenSlider.value();
-  let b = blueSlider.value();
-  let a = alphaSlider.value();
-  let strokeWidth = weightSlider.value();
-  let depth = depthSlider.value();
 
-  let length = lengthSlider.value();
+  let r = redSlider.slider.value();
+  let g = greenSlider.slider.value();
+  let b = blueSlider.slider.value();
+  let a = alphaSlider.slider.value();
+  let strokeWidth = weightSlider.slider.value();
+  let depth = depthSlider.slider.value();
+  let length = lengthSlider.slider.value();
+
+  let breathOffset = sin(frameCount * 0.1) * 12;
 
   stroke(r, g, b, a);
-  translate(width / 2, height / 2+100);
+  translate(width / 2, height / 2 + 100);
 
-  let newAng = angleSlider.value();
+  let newAng = angleSlider.slider.value();
   updateAngleDisplay();
   // let angleInDegrees = degrees(newAng);
   // angleDisplay.html('Current Angle: ' + angleInDegrees.toFixed(2));
@@ -112,7 +61,8 @@ function draw() {
   push();
   let weight = decreasingWeight ? strokeWidth * (depth / 10) : strokeWidth;
   let treeBranch = new Branch(length, depth, newAng, weight);
-  treeBranch.draw();
+  //treeBranch.draw();
+  treeBranch.drawBreath(breathOffset);
   pop();
 }
 
@@ -124,6 +74,6 @@ function exportSVG() {
 function updateAngleDisplay() {
   let clearStatus = clearEnabled ? "ON" : "OFF";
   //let newAng = angleSlider.value();
-  let angleInDegrees = degrees(angleSlider.value());
+  let angleInDegrees = degrees(angleSlider.slider.value());
   angleDisplay.html(`Current Angle: ${angleInDegrees.toFixed(2)} | Clear Mode: ${clearStatus}`);
 }

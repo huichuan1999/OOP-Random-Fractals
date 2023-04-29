@@ -101,7 +101,6 @@ canvas {
   background-color: #ddd;
   outline: none;
   margin-right: 50px;
-  
 }
 
 .custom-slider::-webkit-slider-thumb {
@@ -177,13 +176,14 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 100%;
   }
 
   .button {
     font-size: 20px;
     margin: 0 5px;
+    width:25%;
     box-sizing: border-box;
   }
 /* 
