@@ -1,46 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
-    <script src="libraries/p5.dom.js"></script>
-    <script src="https://unpkg.com/p5.js-svg@1.3.1"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
 
-  </head>
-  <body>
-    <main>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+  <script src="libraries/p5.dom.js"></script>
+  <script src="https://unpkg.com/p5.js-svg@1.3.1"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <main>
+    <!-- <div id="canvas"></div> -->
+    <div class="controls-container">
+      <span id="angleDisplay" class="angle-display"></span>
+      <div id="button-container"></div>
       <div id="slider-container">
-        <div>
-          <label for="redSlider">Red: </label>
-          <input type="range" id="redSlider" min="0" max="255" value="0" step="1">
-        </div>
-        <div>
-          <label for="greenSlider">Green: </label>
-          <input type="range" id="greenSlider" min="0" max="255" value="0" step="1">
-        </div>
-        <div>
-          <label for="blueSlider">Blue: </label>
-          <input type="range" id="blueSlider" min="0" max="255" value="0" step="1">
-        </div>
-        <div>
-          <label for="weightSlider">Stroke Weight: </label>
-          <input type="range" id="weightSlider" min="1" max="10" value="1" step="1">
-        </div>
-        <div>
-          <label for="depthSlider">Depth: </label>
-          <input type="range" id="depthSlider" min="1" max="10" value="6" step="1">
-        </div>
+        <div id="slider-row-1"></div>
+        <div id="slider-row-2"></div>
       </div>
-      
-      <div id="button-container">
-        <button id="saveSVG">Save SVG</button>
-        <button id="saveImage">Save Image</button>
-        <button id="toggleWeight">Toggle Stroke Weight</button>
-      </div>
-    </main>
-    <script src="sketch.js"></script>
-    <script src="Branch.js"></script>
-  </body>
+    </div>
+  </main>
+  <script src="sketch.js"></script>
+  <script src="Branch.js"></script>
+</body>
+
 </html>
