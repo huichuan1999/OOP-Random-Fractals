@@ -7,7 +7,7 @@ let angleDisplay;
 let clearEnabled = true;
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight-windowHeight/4, SVG);
+  canvas = createCanvas(windowWidth, windowHeight, SVG);
   //canvas.id("canvas");
   //canvas.parent("sketch-container"); //SVG canvas cannot add into parent, It is weird
 
@@ -98,7 +98,7 @@ function draw() {
   let length = lengthSlider.value();
 
   stroke(r, g, b, a);
-  translate(width / 2, height / 2);
+  translate(width / 2, height / 2+100);
 
   let newAng = angleSlider.value();
   updateAngleDisplay();
@@ -121,5 +121,5 @@ function updateAngleDisplay() {
   let clearStatus = clearEnabled ? "ON" : "OFF";
   //let newAng = angleSlider.value();
   let angleInDegrees = degrees(angleSlider.value());
-  angleDisplay.html(`Current angle: ${angleInDegrees.toFixed(2)} | Clear mode: ${clearStatus}`);
+  angleDisplay.html(`Current Angle: ${angleInDegrees.toFixed(2)} | Clear Mode: ${clearStatus}`);
 }
