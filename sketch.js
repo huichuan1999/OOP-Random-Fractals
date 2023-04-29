@@ -40,6 +40,9 @@ function draw() {
     clear();
   }
 
+  drawFog();
+  //if(frameCount % 4 == 0)drawFog(); // only draw the fog evey 16 frames
+
   let r = redSlider.slider.value();
   let g = greenSlider.slider.value();
   let b = blueSlider.slider.value();
@@ -77,3 +80,12 @@ function updateAngleDisplay() {
   let angleInDegrees = degrees(angleSlider.slider.value());
   angleDisplay.html(`Current Angle: ${angleInDegrees.toFixed(2)} | Clear Mode: ${clearStatus}`);
 }
+
+function drawFog(){
+  push();
+  fill(0, 16);
+  noStroke();
+  rect(0,0,width,height);
+  pop();
+}
+
