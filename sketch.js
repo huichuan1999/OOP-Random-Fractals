@@ -6,7 +6,7 @@ let saveSVGButton, saveImageButton, toggleWeightButton,
 let currentWeight = 1;
 let decreasingWeight = false;
 let angleDisplay;
-let clearEnabled = false;
+let clearEnabled = true;
 
 let drawEllipseAtEnd = true; 
 
